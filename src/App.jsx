@@ -1,3 +1,4 @@
+import { LanguageProvider } from './context/LanguageContext';
 import Navigation from './components/Navigation';
 import About from './components/About';
 import Research from './components/Research';
@@ -8,16 +9,18 @@ import './App.css';
 
 function App() {
   return (
-    <div className="app">
-      <Navigation />
-      <main>
-        <About />
-        <Research />
-        <Projects />
-        <CV />
-        <Contact />
-      </main>
-    </div>
+    <LanguageProvider>
+      <div className="app">
+        <Navigation />
+        <main>
+          <About />
+          <Research />
+          <Projects />
+          <CV />
+          <Contact />
+        </main>
+      </div>
+    </LanguageProvider>
   );
 }
 

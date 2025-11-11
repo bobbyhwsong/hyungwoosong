@@ -1,6 +1,9 @@
+import { useLanguage } from '../context/LanguageContext';
 import './Research.css';
 
 function Research() {
+  const { language } = useLanguage();
+
   // 논문 데이터 예시 (실제 데이터로 교체하세요)
   const publications = [
     {
@@ -39,15 +42,39 @@ function Research() {
     }
   ];
 
+  const content = {
+    en: {
+      title: 'Research & Publications',
+      overview: 'My research focuses on [Main Research Field]. I am particularly interested in solving problems related to [Specific Research Topics].',
+      inProgress: 'In Progress',
+      paper: 'Paper',
+      code: 'Code',
+      slides: 'Slides',
+      statsPublications: 'Publications',
+      statsInProgress: 'In Progress'
+    },
+    ko: {
+      title: '연구 & 출판',
+      overview: '저의 연구는 [주요 연구 분야]에 초점을 맞추고 있습니다. 특히 [구체적인 연구 주제]와 관련된 문제를 해결하는 데 관심이 있습니다.',
+      inProgress: '진행 중',
+      paper: '논문',
+      code: '코드',
+      slides: '슬라이드',
+      statsPublications: '출판 논문',
+      statsInProgress: '진행 중'
+    }
+  };
+
+  const t = content[language];
+
   return (
     <section id="research" className="section research-section">
       <div className="container">
-        <h2 className="section-title">Research & Publications</h2>
+        <h2 className="section-title">{t.title}</h2>
 
         <div className="research-overview">
           <p className="overview-text">
-            저의 연구는 [주요 연구 분야]에 초점을 맞추고 있습니다.
-            특히 [구체적인 연구 주제]와 관련된 문제를 해결하는 데 관심이 있습니다.
+            {t.overview}
           </p>
         </div>
 
@@ -57,7 +84,7 @@ function Research() {
               <div className="pub-header">
                 <span className="pub-type">{pub.type}</span>
                 {pub.status === 'in-progress' && (
-                  <span className="pub-status">In Progress</span>
+                  <span className="pub-status">{t.inProgress}</span>
                 )}
               </div>
               <h3 className="pub-title">{pub.title}</h3>
@@ -67,17 +94,17 @@ function Research() {
                 <div className="pub-links">
                   {pub.links.paper && (
                     <a href={pub.links.paper} className="pub-link" target="_blank" rel="noopener noreferrer">
-                      📄 Paper
+                      📄 {t.paper}
                     </a>
                   )}
                   {pub.links.code && (
                     <a href={pub.links.code} className="pub-link" target="_blank" rel="noopener noreferrer">
-                      💻 Code
+                      💻 {t.code}
                     </a>
                   )}
                   {pub.links.slides && (
                     <a href={pub.links.slides} className="pub-link" target="_blank" rel="noopener noreferrer">
-                      📊 Slides
+                      📊 {t.slides}
                     </a>
                   )}
                 </div>
@@ -89,11 +116,11 @@ function Research() {
         <div className="research-stats">
           <div className="stat-item">
             <div className="stat-number">{publications.filter(p => p.status === 'published').length}</div>
-            <div className="stat-label">Publications</div>
+            <div className="stat-label">{t.statsPublications}</div>
           </div>
           <div className="stat-item">
             <div className="stat-number">{publications.filter(p => p.status === 'in-progress').length}</div>
-            <div className="stat-label">In Progress</div>
+            <div className="stat-label">{t.statsInProgress}</div>
           </div>
         </div>
       </div>
