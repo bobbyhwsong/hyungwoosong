@@ -1,6 +1,9 @@
+import { useLanguage } from '../context/LanguageContext';
 import './Projects.css';
 
 function Projects() {
+  const { language } = useLanguage();
+
   // 프로젝트 데이터 예시 (실제 데이터로 교체하세요)
   const projects = [
     {
@@ -41,10 +44,31 @@ function Projects() {
     }
   ];
 
+  const content = {
+    en: {
+      title: 'Projects',
+      screenshot: 'Project Screenshot',
+      inProgress: 'In Progress',
+      github: 'GitHub',
+      demo: 'Demo',
+      paper: 'Paper'
+    },
+    ko: {
+      title: '프로젝트',
+      screenshot: '프로젝트 스크린샷',
+      inProgress: '진행 중',
+      github: 'GitHub',
+      demo: '데모',
+      paper: '논문'
+    }
+  };
+
+  const t = content[language];
+
   return (
     <section id="projects" className="section projects-section">
       <div className="container">
-        <h2 className="section-title">Projects</h2>
+        <h2 className="section-title">{t.title}</h2>
 
         <div className="projects-grid">
           {projects.map((project) => (
@@ -54,11 +78,11 @@ function Projects() {
                   <img src={project.image} alt={project.title} />
                 ) : (
                   <div className="image-placeholder">
-                    <span>Project Screenshot</span>
+                    <span>{t.screenshot}</span>
                   </div>
                 )}
                 {project.status === 'in-progress' && (
-                  <div className="project-badge">In Progress</div>
+                  <div className="project-badge">{t.inProgress}</div>
                 )}
               </div>
 
@@ -75,17 +99,17 @@ function Projects() {
                 <div className="project-links">
                   {project.links.github && (
                     <a href={project.links.github} className="project-link" target="_blank" rel="noopener noreferrer">
-                      <span>GitHub</span>
+                      <span>{t.github}</span>
                     </a>
                   )}
                   {project.links.demo && (
                     <a href={project.links.demo} className="project-link" target="_blank" rel="noopener noreferrer">
-                      <span>Demo</span>
+                      <span>{t.demo}</span>
                     </a>
                   )}
                   {project.links.paper && (
                     <a href={project.links.paper} className="project-link" target="_blank" rel="noopener noreferrer">
-                      <span>Paper</span>
+                      <span>{t.paper}</span>
                     </a>
                   )}
                 </div>

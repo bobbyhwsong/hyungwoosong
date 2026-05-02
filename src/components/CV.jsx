@@ -1,6 +1,9 @@
+import { useLanguage } from '../context/LanguageContext';
 import './CV.css';
 
 function CV() {
+  const { language } = useLanguage();
+
   const education = [
     {
       id: 1,
@@ -90,20 +93,41 @@ function CV() {
     }
   ];
 
+  const content = {
+    en: {
+      title: 'Curriculum Vitae',
+      downloadCV: 'Download Full CV (PDF)',
+      education: 'Education',
+      experience: 'Experience',
+      awards: 'Awards & Honors',
+      skills: 'Skills'
+    },
+    ko: {
+      title: '이력서',
+      downloadCV: '전체 이력서 다운로드 (PDF)',
+      education: '학력',
+      experience: '경력',
+      awards: '수상 & 영예',
+      skills: '기술'
+    }
+  };
+
+  const t = content[language];
+
   return (
     <section id="cv" className="section cv-section">
       <div className="container">
-        <h2 className="section-title">Curriculum Vitae</h2>
+        <h2 className="section-title">{t.title}</h2>
 
         <div className="cv-download">
           <a href="#" className="download-button">
-            📥 Download Full CV (PDF)
+            📥 {t.downloadCV}
           </a>
         </div>
 
         {/* Education */}
         <div className="cv-block">
-          <h3 className="cv-block-title">Education</h3>
+          <h3 className="cv-block-title">{t.education}</h3>
           <div className="timeline">
             {education.map((edu) => (
               <div key={edu.id} className="timeline-item">
@@ -125,7 +149,7 @@ function CV() {
 
         {/* Experience */}
         <div className="cv-block">
-          <h3 className="cv-block-title">Experience</h3>
+          <h3 className="cv-block-title">{t.experience}</h3>
           <div className="timeline">
             {experience.map((exp) => (
               <div key={exp.id} className="timeline-item">
@@ -150,7 +174,7 @@ function CV() {
 
         {/* Awards & Honors */}
         <div className="cv-block">
-          <h3 className="cv-block-title">Awards & Honors</h3>
+          <h3 className="cv-block-title">{t.awards}</h3>
           <div className="awards-list">
             {awards.map((award) => (
               <div key={award.id} className="award-item">
@@ -166,7 +190,7 @@ function CV() {
 
         {/* Skills */}
         <div className="cv-block">
-          <h3 className="cv-block-title">Skills</h3>
+          <h3 className="cv-block-title">{t.skills}</h3>
           <div className="skills-grid">
             {skills.map((skill, idx) => (
               <div key={idx} className="skill-category">
